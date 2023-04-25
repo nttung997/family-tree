@@ -9,7 +9,7 @@
         <div>Available</div>
       </div>
     </div>
-    <div class="px-3 shadow rounded ml-3 items-center flex">
+    <div class="px-3 ml-3 items-center flex">
       <input v-model="youSend" placeholder="You send" type="number" :max="user.balance.value" />
     </div>
   </div>
@@ -19,15 +19,15 @@ import currency from 'currency.js'
 import { onMounted, computed } from 'vue'
 import { useCurrencyExchangeStore } from '@/stores/currencyExchange'
 import { useUserStore } from '@/stores/user'
-const currencyexchange = useCurrencyExchangeStore()
+const currencyExchange = useCurrencyExchangeStore()
 const user = useUserStore()
 
 const youSend = computed({
   get() {
-    return currencyexchange.youSend
+    return currencyExchange.youSend
   },
   set(newValue) {
-    currencyexchange.youSend = currency(newValue)
+    currencyExchange.youSend = currency(newValue)
   }
 })
 onMounted(() => {

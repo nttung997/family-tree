@@ -1,27 +1,18 @@
 <template>
   <div>
-    <div>{{ fee/100 }} {{ "USD" }} fees</div>
-    <div>{{ conversionRate[selected] }} {{ selected }} exchange rate</div>
+    <div>{{ currencyExchange.fee }} {{ "USD" }} fees</div>
+    <div>{{ currencyExchange.currentRate }} {{ currencyExchange.selected }} exchange rate</div>
   </div>
 </template>
-<script>
-import feeCalculator from "@/mixins/feeCalculator";
-import { mapGetters, mapState } from "vuex";
+<script setup lang="ts">
+import { onMounted, computed } from 'vue'
+import { useCurrencyExchangeStore } from '@/stores/currencyExchange'
+import { useConversionStore } from '@/stores/conversion'
+const currencyExchange = useCurrencyExchangeStore()
+const conversion = useConversionStore()
 
-export default {
-  mixins: [feeCalculator],
-  computed: {
-    ...mapState({
-      conversionRate: (state) => state.conversion.conversionRate,
-      selected: (state) => state.currencyExchange.selected,
-      
-    }),
-    ...mapGetters("currencyExchange", ["fee"]),
-  },
-  created() {
-    this.$store.dispatch("conversion/getConversionRate");
-  },
-};
+onMounted(() => {
+  conversion.getConversionRate()
+})
 </script>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

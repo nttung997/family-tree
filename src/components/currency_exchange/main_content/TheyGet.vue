@@ -4,66 +4,48 @@
       <div class="px-3 align-self-center">
         <img :src="getImgUrl()" alt="" />
       </div>
-      <b-form-select v-model="selected" :options="options"></b-form-select>
+      <select v-model="selected">
+        <option v-for="option in options" :value="option.value">{{ option.text }}</option>
+      </select>
     </div>
 
     <div class="px-3 shadow rounded ml-3 items-center flex">
-      <b-form-input
-        :value="(theyGet / 100) | moneyFormater"
-        readonly
-        placeholder="Recipient Gets"
-      ></b-form-input>
+      <input :value="currencyExchange.theyGet"  placeholder="Recipient Gets">
     </div>
   </div>
 </template>
-<script>
-import { mapState, mapGetters } from "vuex";
-import moneyFormater from "@/mixins/moneyFormater";
+<script setup lang="ts">
+import { onMounted, computed } from 'vue'
+import { useCurrencyExchangeStore } from '@/stores/currencyExchange'
+import { useConversionStore } from '@/stores/conversion'
+const currencyExchange = useCurrencyExchangeStore()
+const conversion = useConversionStore()
 
-export default {
-  mixins: [moneyFormater],
-  data() {
-    return {
-      // selected: null,
-    };
+const options = computed(() => {
+  let result: {
+    html: string,
+    value: string,
+    text: string,
+  }[] = [];
+  Object.keys(conversion.conversionRate).forEach(function (key) {
+    let src = `/src/assets/icons/${key}.svg`
+    result.push({
+      html: `<img src="${src}"/> ` + key,
+      value: key,
+      text: key,
+    });
+  });
+  return result;
+})
+const selected = computed({
+  get() {
+    return currencyExchange.selected
   },
-  computed: {
-    ...mapState({
-      conversionRate: (state) => state.conversion.conversionRate,
-    }),
-    ...mapGetters("currencyExchange", ["theyGet"]),
-
-    options() {
-      let result = [];
-      Object.keys(this.conversionRate).forEach(function (key) {
-        let src = require(`@/assets/icons/${key}.svg`);
-        result.push({
-          html: `<img src="${src}"/> ` + key,
-          value: key,
-          text: key,
-        });
-      });
-      return result;
-    },
-
-    selected: {
-      get() {
-        return this.$store.state.currencyExchange.selected;
-      },
-      set(value) {
-        this.$store.commit("currencyExchange/setState", {
-          key: "selected",
-          value: value,
-        });
-      },
-    },
+  set(value: string) {
+    currencyExchange.selected = value
   },
-  methods: {
-    getImgUrl() {
-      return require(`@/assets/icons/${this.selected}.svg`);
-    },
-  },
-};
+})
+function getImgUrl() {
+  return `/src/assets/icons/${selected.value}.svg`;
+}
 </script>
-<style lang="scss" scoped>
-</style>

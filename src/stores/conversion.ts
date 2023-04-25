@@ -1,59 +1,34 @@
-/* eslint-disable no-unused-vars */
-// import axios from "axios";
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
 
 const CONVERSION_RATE = {
-  EUR: 0.815894,
-  CAD: 1.204355,
-  GBP: 0.70602,
-  MXN: 19.88162,
-  PLN: 3.66121
+  'EUR': 0.815894,
+  'CAD': 1.204355,
+  'GBP': 0.70602,
+  'MXN': 19.88162,
+  'PLN': 3.66121
 }
 
-const state = {
-  conversionRate: {},
-  status: null,
-}
+export const useConversionStore = defineStore('conversion', () => {
+  const type: { [key: string]: number } = {}
+  const conversionRate = ref(type)
+  const status = ref('')
 
-const getters = {
-
-}
-
-const actions = {
-  getConversionRate({ commit }) {
+  function getConversionRate() {
     return new Promise((resolve, reject) => {
-      commit('loading')
+      status.value = 'loading'
       let mockPromise = new Promise(function (resolve) {
         setTimeout(resolve, 100);
       })
       mockPromise.then(() => {
-        commit('success', {
-          key: 'conversionRate', value: CONVERSION_RATE
-        })
-        resolve(56443)
+        status.value = 'success'
+        conversionRate.value = CONVERSION_RATE
+        resolve(CONVERSION_RATE)
       }).catch(error => {
-        commit('error')
+        status.value = 'error'
         reject(error)
       })
     })
-  },
-}
-
-const mutations = {
-  loading(state) {
-    state.status = 'loading'
-  },
-  success(state, { key, value }) {
-    state.status = 'success'
-    state[key] = value
-  },
-  error(state) {
-    state.status = 'error'
-  },
-}
-export default {
-  namespaced: true,
-  state,
-  getters,
-  actions,
-  mutations
-}
+  }
+  return { getConversionRate, conversionRate }
+})
