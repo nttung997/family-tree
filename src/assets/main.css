@@ -36,3 +36,7 @@ a,
     padding: 0 2rem;
   }
 }
+
+input, select{
+  background-color: currentcolor;
+}

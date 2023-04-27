@@ -10,8 +10,8 @@ const CONVERSION_RATE = {
 }
 
 export const useConversionStore = defineStore('conversion', () => {
-  const type: { [key: string]: number } = {}
-  const conversionRate = ref(type)
+  const conversionRateType: { [key: string]: number } = {}
+  const conversionRate = ref(conversionRateType)
   const status = ref('')
 
   function getConversionRate() {

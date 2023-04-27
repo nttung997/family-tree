@@ -24,7 +24,7 @@ const user = useUserStore()
 
 const youSend = computed({
   get() {
-    return currencyExchange.youSend
+    return currencyExchange.youSend.value
   },
   set(newValue) {
     currencyExchange.youSend = currency(newValue)

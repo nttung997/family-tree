@@ -10,9 +10,9 @@ export const useCurrencyExchangeStore = defineStore('currencyExchange', () => {
 
   const fee = computed(() => {
     const amount = youSend.value
-    if (amount < currency(10)) return amount.multiply(0.5 / 100)
-    if (amount < currency(100)) return amount.multiply(0.8 / 100)
-    return amount.multiply(0.5 / 100).add(currency(1.5))
+    if (amount.value < 10) return amount.multiply(0.5 / 100)
+    if (amount.value < 100) return amount.multiply(0.8 / 100)
+    return amount.multiply(0.5 / 100).add(1.5)
   })
 
   const currentRate = computed(() => {
@@ -20,7 +20,6 @@ export const useCurrencyExchangeStore = defineStore('currencyExchange', () => {
   })
 
   const theyGet = computed(() => {
-    if (!youSend) return null
     const rate = currentRate.value
     let result = youSend.value.subtract(fee.value).multiply(rate)
     return result
