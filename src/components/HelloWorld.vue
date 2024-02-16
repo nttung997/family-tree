@@ -1,47 +1,66 @@
 <script setup lang="ts">
-
 </script>
 
 <template>
   <div class="tree">
-      <ul>
-        <li>
-          <a href="#">Chín</a>
-          <ul>
-            <li>
-              <a href="#">Child</a>
-              <ul>
-                <li>
-                  <a href="#">Grand Child</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">Hoàn</a>
-              <ul>
-                <li>
-                  <a href="#">Grand Child</a>
-                </li>
-                <li>
-                  <a href="#">Hiếu</a>
-                  <ul>
-                    <li>
-                      <a href="#">Tùng</a>
-                    </li>
-                    <li>
-                      <a href="#">Ngọc Anh</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">Grand Child</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+    <ul>
+      <li>
+        <a href="#">Chín</a>
+        <ul>
+          <li>
+            <a href="#">Child</a>
+            <ul>
+              <li>
+                <a href="#">Grand Child</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Hoàn</a>
+            <ul>
+              <li>
+                <a href="#">Quân</a>
+                <ul>
+                  <li>
+                    <a href="#">Hà</a>
+                  </li>
+                  <li>
+                    <a href="#">Quang</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <a href="#">Huyền</a>
+              </li>
+              <li>
+                <a href="#">Hiếu</a>
+                <ul>
+                  <li>
+                    <a href="#">Tùng</a>
+                  </li>
+                  <li>
+                    <a href="#">Ngọc Anh</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">Trung</a>
+                <ul>
+                  <li>
+                    <a href="#">Kiều Anh</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">Thắng</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style scoped>
@@ -68,7 +87,7 @@
 }
 .tree li::before,
 .tree li::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   right: 50%;
@@ -100,7 +119,7 @@
   border-radius: 5px 0 0 0;
 }
 .tree ul ul::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 50%;
@@ -131,5 +150,4 @@
 .tree li a:hover + ul ul::before {
   border-color: #94a0b4;
 }
-
 </style>
