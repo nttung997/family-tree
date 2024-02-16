@@ -6,7 +6,7 @@
   <div class="tree">
       <ul>
         <li>
-          <a href="#">Parent</a>
+          <a href="#">Chín</a>
           <ul>
             <li>
               <a href="#">Child</a>
@@ -17,22 +17,19 @@
               </ul>
             </li>
             <li>
-              <a href="#">Child</a>
+              <a href="#">Hoàn</a>
               <ul>
                 <li>
                   <a href="#">Grand Child</a>
                 </li>
                 <li>
-                  <a href="#">Grand Child</a>
+                  <a href="#">Hiếu</a>
                   <ul>
                     <li>
-                      <a href="#">Great Grand Child</a>
+                      <a href="#">Tùng</a>
                     </li>
                     <li>
-                      <a href="#">Great Grand Child</a>
-                    </li>
-                    <li>
-                      <a href="#">Great Grand Child</a>
+                      <a href="#">Ngọc Anh</a>
                     </li>
                   </ul>
                 </li>
