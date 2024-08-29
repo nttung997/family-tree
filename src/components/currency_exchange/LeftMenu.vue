@@ -61,14 +61,16 @@ export default {
   name: "LeftMenu",
 };
 </script>
-<style lang="scss" scoped>
+<style scoped>
 .menu {
   background-color: #0e0d52;
 }
+
 .text-off-white {
   color: #cad5f9;
 }
-.step{
+
+.step {
   background: #2A2E94;
 }
 </style>

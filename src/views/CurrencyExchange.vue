@@ -8,4 +8,3 @@ import MainContent from "@/components/currency_exchange/MainContent.vue";
     <MainContent></MainContent>
   </div>
 </template>
-

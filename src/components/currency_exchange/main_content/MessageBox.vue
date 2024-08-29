@@ -6,7 +6,7 @@
 </template>
 <script setup lang="ts">
 </script>
-<style  scoped>
+<style scoped>
 .form-group {
   border: 1px solid #2E3A42;
   border-radius: 4px;
@@ -17,7 +17,6 @@
   position: absolute;
   top: -1rem;
   left: 20px;
-  background-color: white;
 }
 
 .form-group>input {

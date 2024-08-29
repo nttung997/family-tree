@@ -11,10 +11,11 @@ export const useUserStore = defineStore('user', () => {
     return new Promise((resolve, reject) => {
       status.value = 'loading'
       //  let mockPromise = axios.get(`user`)
-      let mockPromise = new Promise((resolve) => {
+
+      const mockPromise = new Promise((resolve: (v: number) => void) => {
         setTimeout(() => { return resolve(564.43) }, 100);
       })
-      mockPromise.then((response: any) => {
+      mockPromise.then((response) => {
         status.value = 'success'
         balance.value = currency(response)
         resolve

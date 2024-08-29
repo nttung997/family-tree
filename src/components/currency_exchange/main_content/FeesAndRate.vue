@@ -5,7 +5,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, computed } from 'vue'
+import { onMounted } from 'vue'
 import { useCurrencyExchangeStore } from '@/stores/currencyExchange'
 import { useConversionStore } from '@/stores/conversion'
 const currencyExchange = useCurrencyExchangeStore()

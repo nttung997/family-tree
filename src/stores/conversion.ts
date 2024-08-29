@@ -7,23 +7,25 @@ const CONVERSION_RATE = {
   'GBP': 0.70602,
   'MXN': 19.88162,
   'PLN': 3.66121
-}
+} as const
+
+type conversionRateType = typeof CONVERSION_RATE
+export type conversionRateKey = keyof conversionRateType
 
 export const useConversionStore = defineStore('conversion', () => {
-  const conversionRateType: { [key: string]: number } = {}
-  const conversionRate = ref(conversionRateType)
-  const status = ref('')
+  const conversionRate = ref({} as conversionRateType)
+  const status = ref('' as 'loading' | 'success' | 'error')
 
   function getConversionRate() {
     return new Promise((resolve, reject) => {
       status.value = 'loading'
-      let mockPromise = new Promise(function (resolve) {
-        setTimeout(resolve, 100);
+      const mockPromise = new Promise((resolve: (v: conversionRateType) => void) => {
+        setTimeout(() => resolve(CONVERSION_RATE), 100);
       })
-      mockPromise.then(() => {
+      mockPromise.then((res) => {
         status.value = 'success'
-        conversionRate.value = CONVERSION_RATE
-        resolve(CONVERSION_RATE)
+        conversionRate.value = res
+        resolve(res)
       }).catch(error => {
         status.value = 'error'
         reject(error)

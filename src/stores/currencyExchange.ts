@@ -1,12 +1,12 @@
 import currency from 'currency.js'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { useConversionStore } from '@/stores/conversion'
+import { useConversionStore, conversionRateKey } from '@/stores/conversion'
 const conversion = useConversionStore()
 
 export const useCurrencyExchangeStore = defineStore('currencyExchange', () => {
   const youSend = ref(currency(0))
-  const selected = ref('EUR')
+  const selected = ref('EUR' as conversionRateKey)
 
   const fee = computed(() => {
     const amount = youSend.value
@@ -21,8 +21,9 @@ export const useCurrencyExchangeStore = defineStore('currencyExchange', () => {
 
   const theyGet = computed(() => {
     const rate = currentRate.value
-    let result = youSend.value.subtract(fee.value).multiply(rate)
+    const result = youSend.value.subtract(fee.value).multiply(rate)
     return result
   })
+
   return { youSend, selected, fee, theyGet, currentRate }
 })

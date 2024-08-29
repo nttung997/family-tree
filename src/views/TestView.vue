@@ -1,22 +1,24 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import type { Ref } from 'vue'
+
+interface Todo {
+  id: number
+  text: string
+  done: boolean
+}
 
 let id = 0
-
 const newTodo = ref('')
 const hideCompleted = ref(false)
-const todos = ref([
-  { id: id++, text: 'Learn HTML', done: true },
-  { id: id++, text: 'Learn JavaScript', done: true },
-  { id: id++, text: 'Learn Vue', done: false }
-])
+const todos: Ref<Todo[]> = ref([])
 
 function addTodo() {
   todos.value.push({ id: id++, text: newTodo.value, done: false })
   newTodo.value = ''
 }
 
-function removeTodo(todo: { id: number, text: string, done: boolean }) {
+function removeTodo(todo: Todo) {
   todos.value = todos.value.filter((t) => t !== todo)
 }
 const filteredTodos = computed(() => {
